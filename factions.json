@@ -1,0 +1,84 @@
+{
+  "factions": [
+    {
+      "id": "faction-01",
+      "name": "Order of General Reason",
+      "archetype": "Knowledge Stabilizers",
+      "psi_multiplier": 0.8,
+      "cci_adjustment": 0.1,
+      "stability_requirement": 0.9,
+      "anomaly_tolerance": 0.3,
+      "investment_pref": 1.0,
+      "validation_thresholds": {
+        "Psi_min": 8.0,
+        "C_min": 0.7,
+        "S_min": 0.8,
+        "AS_max": 1.0
+      }
+    },
+    {
+      "id": "02",
+      "name": "Breachborn",
+      "archetype": "Social Manipulators",
+      "psi_multiplier": 1.1,
+      "cci_adjustment": -0.2,
+      "stability_requirement": 0.6,
+      "anomaly_tolerance": 0.7,
+      "investment_pref": 1.2,
+      "validation_thresholds": {
+        "Psi_min": 5.0,
+        "C_min": 0.4,
+        "S_min": 0.5,
+        "AS_max": 2.5
+      }
+    },
+    {
+      "id": "03",
+      "name": "Vire Protocol",
+      "archetype": "Collapse Agents",
+      "psi_multiplier": 0.9,
+      "cci_adjustment": 0.3,
+      "stability_requirement": 0.4,
+      "anomaly_tolerance": 0.2,
+      "investment_pref": 0.8,
+      "validation_thresholds": {
+        "Psi_min": 6.0,
+        "C_min": 0.3,
+        "S_min": 0.3,
+        "AS_max": 0.8
+      }
+    },
+    {
+      "id": "04",
+      "name": "Null-Zone Resonants",
+      "archetype": "Chaos Scavengers",
+      "psi_multiplier": 1.3,
+      "cci_adjustment": -0.1,
+      "stability_requirement": 0.5,
+      "anomaly_tolerance": 1.0,
+      "investment_pref": 0.9,
+      "validation_thresholds": {
+        "Psi_min": 4.0,
+        "C_min": 0.2,
+        "S_min": 0.4,
+        "AS_max": 3.0
+      }
+    },
+    {
+      "id": "05",
+      "name": "Global Psi-Economic Flux",
+      "archetype": "Wildcard Catalyst",
+      "psi_multiplier": 1.5,
+      "cci_adjustment": 0.0,
+      "stability_requirement": 0.2,
+      "anomaly_tolerance": 1.5,
+      "investment_pref": 1.5,
+      "validation_thresholds": {
+        "Psi_min": 2.0,
+        "C_min": 0.1,
+        "S_min": 0.2,
+        "AS_max": 4.0
+      }
+    }
+  ]
+}
