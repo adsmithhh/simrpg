@@ -365,6 +365,8 @@ def update_currency_supply(M, psi, faction):
     return M + beta_psi * (psi * faction['psi_multiplier']) * faction['investment_pref']
 
 def main():
+    print("Hello from main!")  # <-- Add this line at the start
+
     # Clear previous simulation plots
     folder = "sim_plots"
     files = glob.glob(os.path.join(folder, "*"))
@@ -468,8 +470,8 @@ def main():
     print(f"Faction comparison plot saved as {comparison_file}")
 
     # Extract and save only the beats information to a new file
-    input_file = "simulation_output.txt"
-    output_file = "simulation_output_clean.txt"
+    input_file = "full_log.txt"
+    output_file = "simulation_output.txt"
 
     with open(input_file, "r") as infile, open(output_file, "a") as outfile:
         for line in infile:
@@ -525,8 +527,11 @@ def main():
     # Paste your full log as a string (replace ... with actual values)
     data_text = """
 [
-{'beat': 1, 'state': {'C': 0.7, 'psi': 10, 'S': 0.1, 'R': 200, 'P': 1.6, 'Node-12': {'EFS': 27.9}, 'Node-51': {'EFS': 5.5}, 'Node-23': {'EFS': 17.0}}, 'inputs': {'d': 0.001, 'I_ritual': 0.001, 'R_phi': 0.001, 'drift': 0.001, 'repair': 0.001, 'E': 0.001, 'D': 0.001, 'R_max': 200.05, 'S_shock': 0.001, 'O_action': 0.001}},
-{'beat': 2, 'state': {'C': 1.2, 'psi': 1.0, 'S': 0.1, 'R': 200, 'P': 3.1, 'Node-12': {'EFS': 27.9}, 'Node-51': {'EFS': 5.5}, 'Node-23': {'EFS': 17.0}}, 'inputs': {'d': 0.999, 'I_ritual': 0.999, 'R_phi': 0.999, 'drift': 0.999, 'repair': 0.999, 'E': 0.999, 'D': 0.999, 'R_max': 249.95, 'S_shock': 0.999, 'O_action': 0.999}}
+{'beat': 1, 'state': {'C': 0.7, 'psi': 10, 'S': 0.1, 'R': 200, 'P': 1.6, 'CCI': 5.0, 'AS': 2.0, 'Node-12': {'EFS': 27.9}, 'Node-51': {'EFS': 5.5}, 'Node-23': {'EFS': 17.0}}},
+{'beat': 2, 'state': {'C': 1.2, 'psi': 1.0, 'S': 0.1, 'R': 200, 'P': 3.1, 'CCI': 5.1, 'AS': 2.1, 'Node-12': {'EFS': 27.9}, 'Node-51': {'EFS': 5.5}, 'Node-23': {'EFS': 17.0}}},
+{'beat': 3, 'state': {'C': 0.9, 'psi': 5.0, 'S': 0.2, 'R': 198, 'P': 2.0, 'CCI': 5.2, 'AS': 2.2, 'Node-12': {'EFS': 27.8}, 'Node-51': {'EFS': 5.4}, 'Node-23': {'EFS': 16.9}}},
+{'beat': 4, 'state': {'C': 1.5, 'psi': 8.0, 'S': 0.3, 'R': 197, 'P': 2.5, 'CCI': 8.3, 'AS': 5.3, 'Node-12': {'EFS': 27.7}, 'Node-51': {'EFS': 5.3}, 'Node-23': {'EFS': 16.8}}},
+{'beat': 5, 'state': {'C': 1.1, 'psi': 3.0, 'S': 0.2, 'R': 196, 'P': 2.2, 'CCI': 9.4, 'AS': 6.4, 'Node-12': {'EFS': 27.6}, 'Node-51': {'EFS': 5.2}, 'Node-23': {'EFS': 16.7}}}
 ]
 """
 
@@ -540,6 +545,10 @@ def main():
         state = entry['state']
         # Add main state variables
         rec.update({k: state[k] for k in ['C', 'psi', 'S', 'R', 'P']})
+        # Add CCI and AS if present
+        for k in ['CCI', 'AS']:
+            if k in state:
+                rec[k] = state[k]
         # Add each node's EFS
         for node in ['Node-12', 'Node-51', 'Node-23']:
             rec[node + '_EFS'] = state[node]['EFS']
@@ -550,13 +559,12 @@ def main():
 
     # Plotting
     for col in ['C', 'psi', 'S', 'R', 'P', 'CCI', 'AS', 'Node-12_EFS', 'Node-51_EFS', 'Node-23_EFS']:
-        if col in df.columns:
-            plt.figure()
-            df[col].plot(marker='o')
-            plt.xlabel('Beat')
-            plt.ylabel(col)
-            plt.title(f'{col} over Beats')
-            plt.show()
+        plt.figure()
+        df[col].plot(marker='o')
+        plt.xlabel('Beat')
+        plt.ylabel(col)
+        plt.title(f'{col} over Beats')
+        plt.show()
         
 
 
@@ -652,3 +660,6 @@ class WalletService:
 # Example usage:
 if __name__ == "__main__":
     main()
+
+with open("simulation_output.txt", "w") as f:
+    f.write("This is a new output file.\n")
