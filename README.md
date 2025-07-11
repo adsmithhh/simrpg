@@ -121,5 +121,6 @@ MIT — use freely, but contribute back if you enhance directive integrity track
 
 ## ✉️ Contact
 
-For collaboration or integration into larger simulations, contact: `simulation.architect@protonmail.com`
+For collaboration or integration into larger simulations, contact: `adsmithhh64@gmail.com'
+
 # simrpg
